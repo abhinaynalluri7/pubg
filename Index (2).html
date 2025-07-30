@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUBG SDLC Overview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #1a1a2e; /* Dark background for gaming theme */
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #0f0f1a;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3); /* Neon glow effect */
+            padding: 30px;
+            border: 1px solid #00ffff;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #00ffff;
+        }
+
+        header h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00ffff;
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 0 0 10px #00ffff;
+        }
+
+        header p {
+            font-size: 1.2em;
+            color: #a0a0a0;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00ffff;
+            font-size: 2.5em;
+            margin-top: 40px;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 700;
+            position: relative;
+            text-shadow: 0 0 5px #00ffff;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: #00ffff;
+            border-radius: 2px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background-color: #1a1a2e;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            border-left: 5px solid #00ffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top left, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .card h3 {
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.7em;
+            margin-top: 0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .card h3::before {
+            content: counter(card-counter);
+            counter-increment: card-counter;
+            background-color: #00ffff;
+            color: #0f0f1a;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.1em;
+            font-weight: 700;
+            margin-right: 15px;
+            flex-shrink: 0;
+            box-shadow: 0 0 8px #00ffff;
+        }
+
+        .card p, .card ul {
+            font-size: 1em;
+            color: #c0c0c0;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .card ul li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .card ul li::before {
+            content: '»'; /* Gaming themed bullet */
+            color: #00ffff;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .card strong {
+            color: #00ffff;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background-color: #1a1a2e;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        table th, table td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        table th {
+            background-color: #00ffff;
+            color: #0f0f1a;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.05em;
+        }
+
+        table td {
+            color: #e0e0e0;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #0f0f1a;
+        }
+
+        table tr:hover {
+            background-color: #2a2a4a;
+            box-shadow: inset 0 0 8px rgba(0, 255, 255, 0.2);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #777;
+            font-size: 0.9em;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 2.5em;
+            }
+            .section-title {
+                font-size: 2em;
+            }
+            .card {
+                padding: 20px;
+            }
+            .card h3 {
+                font-size: 1.5em;
+            }
+            table th, table td {
+                padding: 10px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            [cite_start]<h1>Software Development Life Cycle for PUBG</h1> [cite: 1]
+            <p>Understanding the phased approach to creating a global battle royale phenomenon.</p>
+        </header>
+
+        <section>
+            <h2 class="section-title">SDLC Phases</h2>
+            <div class="grid-container" style="counter-reset: card-counter;">
+                <div class="card">
+                    [cite_start]<h3>Requirement Gathering & Analysis</h3> [cite: 2]
+                    [cite_start]<p><strong>Goal:</strong> Understand what the game should do and for whom. [cite: 2]</p>
+                    <ul>
+                        [cite_start]<li>Define game concept: battle royale, 100 players, survival-based. [cite: 3]</li>
+                        [cite_start]<li>Platform decisions: PC, Mobile, Console. [cite: 3]</li>
+                        [cite_start]<li>Core features: matchmaking, weapons, maps, physics, real-time chat, anti-cheat. [cite: 4]</li>
+                        [cite_start]<li>Stakeholder meetings: Designers, Developers, Product Managers, Gamers. [cite: 4]</li>
+                    </ul>
+                    [cite_start]<p><strong>Outputs:</strong> Game Requirement Specification (GRS), Technical Feasibility Report. [cite: 5]</p>
+                </div>
+                <div class="card">
+                    [cite_start]<h3>Planning</h3> [cite: 6]
+                    [cite_start]<p><strong>Goal:</strong> Organize project scope, team roles, and timeline. [cite: 6]</p>
+                    <ul>
+                        [cite_start]<li>Create roadmap with sprints (Agile approach). [cite: 7]</li>
+                        [cite_start]<li>Define budget, hardware/software needs. [cite: 7]</li>
+                        [cite_start]<li>Risk analysis (e.g., lag, server overload, cheating). [cite: 7]</li>
+                    </ul>
+                    [cite_start]<p><strong>Outputs:</strong> Project Plan, Resource Allocation, Risk Mitigation Plan. [cite: 8]</p>
+                </div>
+                <div class="card">
+                    [cite_start]<h3>Game Design (High-Level & Low-Level Design)</h3> [cite: 9]
+                    [cite_start]<p><strong>Goal:</strong> Visualize and design the game world and architecture. [cite: 9]</p>
+                    <ul>
+                        [cite_start]<li>High-Level Design (HLD): Architecture, game mechanics, multiplayer backend, graphics engine. [cite: 10]</li>
+                        [cite_start]<li>Low-Level Design (LLD): UI/UX flow, character animations, gun recoil logic, map design. [cite: 10]</li>
+                        [cite_start]<li>Create wireframes, mockups, and game logic diagrams. [cite: 10]</li>
+                    </ul>
+                    [cite_start]<p><strong>Outputs:</strong> Game Design Document (GDD), Architecture Diagrams, UI Screens & Assets. [cite: 11]</p>
+                </div>
+                <div class="card">
+                    [cite_start]<h3>Development (Coding)</h3> [cite: 12]
+                    [cite_start]<p><strong>Goal:</strong> Turn the design into a working game. [cite: 12]</p>
+                    <p><strong>Frontend:</strong></p>
+                    <ul>
+                        [cite_start]<li>Game UI (health bar, inventory, minimap). [cite: 13]</li>
+                        [cite_start]<li>Character controls, animation. [cite: 13]</li>
+                        [cite_start]<li>Sound and visual effects. [cite: 13]</li>
+                    </ul>
+                    <p><strong>Backend:</strong></p>
+                    <ul>
+                        [cite_start]<li>Multiplayer networking (dedicated servers). [cite: 14]</li>
+                        [cite_start]<li>Matchmaking logic. [cite: 14]</li>
+                        [cite_start]<li>Real-time data sync. [cite: 14]</li>
+                        [cite_start]<li>Anti-cheat systems. [cite: 14]</li>
+                    </ul>
+                    <p><strong>Tech Stack:</strong> Game Engine: Unreal Engine (C++); Backend: Node.js, Java, Python; [cite_start]Cloud: AWS/GCP for server hosting. [cite: 15]</p>
+                    [cite_start]<p><strong>Outputs:</strong> Game builds for all platforms, Code repositories. [cite: 16]</p>
+                </div>
+                <div class="card">
+                    [cite_start]<h3>Testing</h3> [cite: 17]
+                    [cite_start]<p><strong>Goal:</strong> Ensure game is stable, fast, and bug-free. [cite: 17]</p>
+                    <p><strong>Types of Testing:</strong></p>
+                    <ul>
+                        [cite_start]<li>Unit Testing [cite: 18]</li>
+                        [cite_start]<li>Smoke Testing [cite: 18]</li>
+                        [cite_start]<li>Performance Testing [cite: 18]</li>
+                        [cite_start]<li>Multiplayer/Server Testing [cite: 18]</li>
+                        [cite_start]<li>Security Testing [cite: 18]</li>
+                        [cite_start]<li>Beta Testing [cite: 18]</li>
+                    </ul>
+                    [cite_start]<p><strong>Outputs:</strong> Bug reports, Test cases & results, Final QA sign-off. [cite: 19]</p>
+                </div>
+                <div class="card">
+                    [cite_start]<h3>Deployment</h3> [cite: 20]
+                    [cite_start]<p><strong>Goal:</strong> Launch the game to users. [cite: 20]</p>
+                    <ul>
+                        [cite_start]<li>Deploy game to Play Store, App Store, Steam, consoles. [cite: 21]</li>
+                        [cite_start]<li>Setup live servers, CDN, and monitoring tools. [cite: 21]</li>
+                        [cite_start]<li>Announce launch via social media & press. [cite: 21]</li>
+                    </ul>
+                    [cite_start]<p><strong>Outputs:</strong> Game Release v1.0, Live Production Environment. [cite: 22]</p>
+                </div>
+                <div class="card">
+                    [cite_start]<h3>Maintenance & Updates</h3> [cite: 23]
+                    [cite_start]<p><strong>Goal:</strong> Keep the game fresh, secure, and running smoothly. [cite: 23]</p>
+                    <ul>
+                        [cite_start]<li>Monitor servers and fix bugs. [cite: 24]</li>
+                        [cite_start]<li>Release patches (e.g., weapon balancing, bug fixes). [cite: 24]</li>
+                        [cite_start]<li>Launch new seasons, maps, skins, characters. [cite: 24]</li>
+                        [cite_start]<li>Gather player feedback for future updates. [cite: 24]</li>
+                    </ul>
+                    [cite_start]<p><strong>Outputs:</strong> Version Updates, Patch Notes, Game Expansion Plans. [cite: 25]</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            [cite_start]<h2 class="section-title">SDLC Summary Table</h2> [cite: 26]
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            [cite_start]<th>Phase</th> [cite: 27]
+                            [cite_start]<th>Key Activities</th> [cite: 27]
+                            [cite_start]<th>Output</th> [cite: 27]
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1. [cite_start]Requirements</td><td>Game concept, features, analysis</td><td>GRS, Feasibility Report</td></tr> [cite: 27]
+                        <tr><td>2. [cite_start]Planning</td><td>Timeline, cost, resources</td><td>Project Plan, Risk Plan</td></tr> [cite: 27]
+                        <tr><td>3. [cite_start]Design</td><td>Architecture, UI, game mechanics</td><td>GDD, Wireframes, Diagrams</td></tr> [cite: 27]
+                        <tr><td>4. [cite_start]Development</td><td>Coding, graphics, multiplayer setup</td><td>Game Build, Source Code</td></tr> [cite: 27]
+                        <tr><td>5. [cite_start]Testing</td><td>QA, performance, beta testing</td><td>Bug Reports, QA Approval</td></tr> [cite: 27]
+                        <tr><td>6. [cite_start]Deployment</td><td>Live servers, app/game store releases</td><td>Released Game</td></tr> [cite: 27]
+                        <tr><td>7. [cite_start]Maintenance</td><td>Bug fixing, new content, updates</td><td>Game Versions, Live Ops Reports</td></tr> [cite: 27]
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 PUBG SDLC Overview. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
